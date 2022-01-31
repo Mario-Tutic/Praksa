@@ -161,7 +161,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CourseView.cs" />
     <Compile Include="Models\StudentPost.cs" />
+    <Compile Include="Models\StudentInfoView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -260,6 +262,10 @@
     <ProjectReference Include="..\University.Model\University.Model.csproj">
       <Project>{ea0de2e5-51bc-4ba2-8ca4-ce1ccf32eec7}</Project>
       <Name>University.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\University1.Common\University1.Common.csproj">
+      <Project>{b0a2ce02-5ab5-4bcb-bd25-4cc7d07a7d66}</Project>
+      <Name>University1.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\univesity.service\Student.Service.csproj">
       <Project>{3cc8d5b3-786d-4348-bd78-1a7e6228a2a8}</Project>

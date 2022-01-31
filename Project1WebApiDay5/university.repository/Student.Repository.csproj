@@ -58,6 +58,13 @@
       <Project>{ea0de2e5-51bc-4ba2-8ca4-ce1ccf32eec7}</Project>
       <Name>University.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\University1.Common\University1.Common.csproj">
+      <Project>{b0a2ce02-5ab5-4bcb-bd25-4cc7d07a7d66}</Project>
+      <Name>University1.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

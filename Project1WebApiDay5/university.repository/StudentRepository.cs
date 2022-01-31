@@ -9,19 +9,20 @@ using System.Data.SqlClient;
 using University.Model.Common;
 using University.Model;
 using Student.Repository.Common;
+using University1.Common;
 
 namespace Student.Repository
 {
     public class StudentRepository:IStudentRepository
     {
-        public async Task< List<StudentInfo>> GetAllStudents()
+        public async Task< List<StudentInfo>> GetAllStudentsAsync(Sorting sort, Pagging pagging, Filter filter)
         {
             try
             {
                 SqlConnection connection = new SqlConnection("data source=DESKTOP-KTD1H84\\SQLEXPRESS;Database=test;integrated security=SSPI");
                 connection.Open();
                 SqlCommand command = new SqlCommand(
-                "SELECT * FROM student;", connection);
+                "SELECT * FROM student "+ filter.Query+ " ORDER BY "+ sort.Column +" "+sort.Order+ " OFFSET "+ pagging.Offset +" ROWS FETCH NEXT "+pagging.ElementsPerPage+" ROWS ONLY", connection);
                 SqlDataReader reader = await command.ExecuteReaderAsync();
                 List<StudentInfo> students = new List<StudentInfo>();
                 if (reader.HasRows)
@@ -52,7 +53,7 @@ namespace Student.Repository
             }
         }
 
-        public async Task PostNewStudent(StudentInfo student)
+        public async Task PostNewStudentAsync(StudentInfo student)
         {
             try
             {
@@ -69,7 +70,7 @@ namespace Student.Repository
             }
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             try
             {
@@ -85,7 +86,7 @@ namespace Student.Repository
             }
         }
 
-        public async Task Put(StudentInfo student, int id)
+        public async Task PutAsync(StudentInfo student, int id)
         {
             try
             {

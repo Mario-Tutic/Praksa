@@ -14,7 +14,7 @@ namespace Student.Repository
 {
     public class CourseRepository:ICourseRepository
     {
-        public async Task<List<Course>> GetAllCourses()
+        public async Task<List<Course>> GetAllCoursesAsync()
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Student.Repository
             }
         }
 
-        public async Task PostNewCourse(Course course)
+        public async Task PostNewCourseAsync(Course course)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace Student.Repository
             }
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             try
             {

@@ -15,22 +15,22 @@ namespace Student.Service
 {
     public class CourseService:ICourseService
     {
-        public async Task<List<Course>> GetAllCourses()
+        public async Task<List<Course>> GetAllCoursesAsync()
         {
             CourseRepository Repository = new CourseRepository();
-            return await Repository.GetAllCourses();
+            return await Repository.GetAllCoursesAsync();
         }
         public async Task PostNewCourse(Course course)
         {
             CourseRepository Repository = new CourseRepository();
-            await Repository.PostNewCourse(course);
+            await Repository.PostNewCourseAsync(course);
             return;
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             CourseRepository Repository = new CourseRepository();
-            await Repository.Delete(id);
+            await Repository.DeleteAsync(id);
             return;
         }
     }

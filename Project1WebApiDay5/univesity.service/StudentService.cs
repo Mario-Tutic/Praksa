@@ -9,36 +9,36 @@ using Student.Repository;
 using University.Model.Common;
 using University.Model;
 using Student.Service.Common;
-
+using University1.Common;
 
 namespace Student.Service
 {
     public class StudentService: IStudentService
     {
-        public async Task<List<StudentInfo>> GetAllStudents()
+        public async Task<List<StudentInfo>> GetAllStudentsAsync(Sorting sort,Pagging pagging,Filter filter)
         {
             StudentRepository Repository = new StudentRepository();
-            return await Repository.GetAllStudents();
+            return await Repository.GetAllStudentsAsync(sort, pagging);
         }
 
-        public async Task PostNewStudent(StudentInfo student)
+        public async Task PostNewStudentAsync(StudentInfo student)
         {
             StudentRepository Repository = new StudentRepository();
-            await Repository.PostNewStudent(student);
+            await Repository.PostNewStudentAsync(student);
             return;
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             StudentRepository Repository = new StudentRepository();
-            await Repository.Delete(id);
+            await Repository.DeleteAsync(id);
             return;
         }
 
-        public async Task Put(StudentInfo student, int id)
+        public async Task PutAsync(StudentInfo student, int id)
         {
             StudentRepository Repository = new StudentRepository();
-            await Repository.Put(student,id);
+            await Repository.PutAsync(student,id);
             return;
         }
     }

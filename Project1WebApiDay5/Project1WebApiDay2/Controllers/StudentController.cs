@@ -11,41 +11,62 @@ using Student.Service.Common;
 using Student.Service;
 using System.Threading.Tasks;
 using Project1WebApiDay2.Models;
+using University1.Common;
+
 namespace Student.Controllers
 {
     public class StudentController : ApiController
     {
-        public async Task<List<StudentInfo>> GetAllStudents()
+        public async Task<HttpResponseMessage> GetAllStudentsAsync(string column="", string order="",int offset=0,int elementsPerPage=0,string name="" )
         {
-            List<StudentInfo> students = new List<StudentInfo>();
+
+            List<StudentInfo> students;
             StudentService service = new StudentService();
-            students = await service.GetAllStudents();
-            return students;
+            List<StudentInfoView> studentsView= new List<StudentInfoView>();
+            Sorting Sort = new Sorting(column,order);
+            Pagging pagging = new Pagging(offset, elementsPerPage);
+            Filter filter = new Filter(name);
+            students = await service.GetAllStudentsAsync(Sort, pagging,filter);
+
+            foreach (var student in students)
+            {
+                StudentInfoView tempStudent = new StudentInfoView();
+                tempStudent.Id = student.Id;
+                tempStudent.Name = student.Name;
+                tempStudent.CourseId_fk = student.CourseId_fk;
+                studentsView.Add(tempStudent);
+
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, studentsView);
         }
 
-        public async Task PostNewStudent(StudentPost tempStudent)
+        public async Task<HttpResponseMessage> PostNewStudentAsync(StudentPost tempStudent)
         {
             StudentInfo student = new StudentInfo();
             student.Name = tempStudent.Name;
             student.CourseId_fk = tempStudent.CourseId_fk;
             student.Id = 0;
             StudentService service = new StudentService();
-            await service.PostNewStudent(student);
-            return;
+            await service.PostNewStudentAsync(student);
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        public async Task Delete(int id)
+        public async Task<HttpResponseMessage> DeleteAsync(int id)
         {
             StudentService Service = new StudentService();
-            await Service.Delete(id);
-            return;
+            await Service.DeleteAsync(id);
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        public async Task Put(StudentInfo student, int id)
+        public async Task<HttpResponseMessage> PutAsync(StudentPost tempStudent, int id)
         {
             StudentService Service = new StudentService();
-            await Service.Put(student, id);
-            return;
+            StudentInfo student = new StudentInfo();
+            student.Name = tempStudent.Name;
+            student.CourseId_fk = tempStudent.CourseId_fk;
+            student.Id = 0;
+            await Service.PutAsync(student, id);
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
 
