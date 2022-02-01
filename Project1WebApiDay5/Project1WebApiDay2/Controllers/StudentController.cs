@@ -23,10 +23,10 @@ namespace Student.Controllers
             List<StudentInfo> students;
             StudentService service = new StudentService();
             List<StudentInfoView> studentsView= new List<StudentInfoView>();
-            Sorting Sort = new Sorting(column,order);
+            SortStudent sort = new SortStudent(column,order);
             Pagging pagging = new Pagging(offset, elementsPerPage);
-            Filter filter = new Filter(name);
-            students = await service.GetAllStudentsAsync(Sort, pagging,filter);
+            StudentFilter filter = new StudentFilter(name);
+            students = await service.GetAllStudentsAsync(sort, pagging,filter);
 
             foreach (var student in students)
             {

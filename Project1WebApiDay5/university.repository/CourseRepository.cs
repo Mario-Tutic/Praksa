@@ -9,19 +9,20 @@ using System.Data.SqlClient;
 using University.Model.Common;
 using University.Model;
 using Student.Repository.Common;
+using University1.Common;
 
 namespace Student.Repository
 {
     public class CourseRepository:ICourseRepository
     {
-        public async Task<List<Course>> GetAllCoursesAsync()
+        public async Task<List<Course>> GetAllCoursesAsync(SortCourse sort, Pagging pagging, CourseFilter filter)
         {
             try
             {
                 SqlConnection connection = new SqlConnection("data source=DESKTOP-KTD1H84\\SQLEXPRESS;Database=test;integrated security=SSPI");
                 connection.Open();
                 SqlCommand command = new SqlCommand(
-                "SELECT * FROM course;", connection);
+                "SELECT * FROM course " + filter.Query + " ORDER BY " + sort.Column + " " + sort.Order + " OFFSET " + pagging.Offset + " ROWS FETCH NEXT " + pagging.ElementsPerPage + " ROWS ONLY", connection);
                 SqlDataReader reader = await command.ExecuteReaderAsync();
                 List<Course> courses = new List<Course>();
                 if (reader.HasRows)

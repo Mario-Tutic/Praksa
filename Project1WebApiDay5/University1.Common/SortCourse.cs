@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace University1.Common
 {
-    public class Sorting
+    public class SortCourse
     {
-        private string column = "Id";
+        private string column = "CourseId";
         private string order = "ASC";
-        public Sorting(string column, string order)
+        public SortCourse(string column, string order)
         {
             if (column != "")
             {

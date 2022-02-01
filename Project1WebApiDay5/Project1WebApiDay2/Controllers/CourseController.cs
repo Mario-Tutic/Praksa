@@ -11,16 +11,21 @@ using Student.Service.Common;
 using Student.Service;
 using System.Threading.Tasks;
 using Project1WebApiDay2.Models;
+using University1.Common;
+
 
 namespace Project1WebApiDay2.Controllers
 {
     public class CourseController : ApiController
     {
-        public async Task<HttpResponseMessage> GetAllStudentsAsync()
+        public async Task<HttpResponseMessage> GetAllStudentsAsync(string column = "", string order = "", int offset = 0, int elementsPerPage = 0, string name = "")
         {
             List<Course> courses = new List<Course>();
             CourseService service = new CourseService();
-            courses = await service.GetAllCoursesAsync();
+            SortCourse sort = new SortCourse(column, order);
+            Pagging pagging = new Pagging(offset, elementsPerPage);
+            CourseFilter filter = new CourseFilter(name);
+            courses = await service.GetAllCoursesAsync(sort, pagging, filter);
             List<CourseView> coursesView = new List<CourseView>();
             foreach (var course in courses)
             {

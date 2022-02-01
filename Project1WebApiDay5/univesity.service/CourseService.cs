@@ -9,16 +9,17 @@ using Student.Repository;
 using University.Model.Common;
 using University.Model;
 using Student.Service.Common;
+using University1.Common;
 
 
 namespace Student.Service
 {
     public class CourseService:ICourseService
     {
-        public async Task<List<Course>> GetAllCoursesAsync()
+        public async Task<List<Course>> GetAllCoursesAsync(SortCourse sort, Pagging pagging, CourseFilter filter)
         {
             CourseRepository Repository = new CourseRepository();
-            return await Repository.GetAllCoursesAsync();
+            return await Repository.GetAllCoursesAsync(sort, pagging, filter);
         }
         public async Task PostNewCourse(Course course)
         {

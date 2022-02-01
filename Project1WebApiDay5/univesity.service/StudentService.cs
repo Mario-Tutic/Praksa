@@ -15,10 +15,10 @@ namespace Student.Service
 {
     public class StudentService: IStudentService
     {
-        public async Task<List<StudentInfo>> GetAllStudentsAsync(Sorting sort,Pagging pagging,Filter filter)
+        public async Task<List<StudentInfo>> GetAllStudentsAsync(SortStudent sort,Pagging pagging,StudentFilter filter)
         {
             StudentRepository Repository = new StudentRepository();
-            return await Repository.GetAllStudentsAsync(sort, pagging);
+            return await Repository.GetAllStudentsAsync(sort, pagging, filter);
         }
 
         public async Task PostNewStudentAsync(StudentInfo student)

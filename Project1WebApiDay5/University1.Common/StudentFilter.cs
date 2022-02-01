@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace University1.Common
 {
-    public class Filter//Allows searching just by name 
+    public class StudentFilter//Allows searching just by name 
     {
-        private string name;
+        private string name="";
         private string query="";
-        public Filter(string name)
+        public StudentFilter(string name)
         {
             if (name != "")
             {
@@ -27,7 +27,6 @@ namespace University1.Common
         public string Query   // property
         {
             get { return query; }   // get method
-            set { query = value; }  // set meth
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Student.Repository
 {
     public class StudentRepository:IStudentRepository
     {
-        public async Task< List<StudentInfo>> GetAllStudentsAsync(Sorting sort, Pagging pagging, Filter filter)
+        public async Task< List<StudentInfo>> GetAllStudentsAsync(SortStudent sort, Pagging pagging, StudentFilter filter)
         {
             try
             {
