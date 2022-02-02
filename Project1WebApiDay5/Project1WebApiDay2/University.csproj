@@ -180,6 +180,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="ContainerConfig.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -276,6 +277,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Student.Repository.Common\Student.Repository.Common.csproj">
+      <Project>{47156bd5-e4ea-4d9f-8c51-bcf944e59323}</Project>
+      <Name>Student.Repository.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Student.Service.Common\Student.Service.Common.csproj">
       <Project>{3a9f79b7-91c4-465b-b2c1-0da59a916725}</Project>
       <Name>Student.Service.Common</Name>
@@ -287,6 +292,10 @@
     <ProjectReference Include="..\University.Model\University.Model.csproj">
       <Project>{ea0de2e5-51bc-4ba2-8ca4-ce1ccf32eec7}</Project>
       <Name>University.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\university.repository\Student.Repository.csproj">
+      <Project>{0342bb03-7c7d-4b02-8356-99a6f7bdc607}</Project>
+      <Name>Student.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\University1.Common\University1.Common.csproj">
       <Project>{b0a2ce02-5ab5-4bcb-bd25-4cc7d07a7d66}</Project>
