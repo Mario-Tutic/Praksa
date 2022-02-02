@@ -17,11 +17,14 @@ namespace Student.Controllers
 {
     public class StudentController : ApiController
     {
+        public StudentController(IStudentService service)
+        {
+            this.service = service;
+        }
+        protected IStudentService service { get; set; }
         public async Task<HttpResponseMessage> GetAllStudentsAsync(string column="", string order="",int offset=0,int elementsPerPage=0,string name="" )
         {
-
             List<StudentInfo> students;
-            StudentService service = new StudentService();
             List<StudentInfoView> studentsView= new List<StudentInfoView>();
             SortStudent sort = new SortStudent(column,order);
             Pagging pagging = new Pagging(offset, elementsPerPage);
@@ -46,26 +49,23 @@ namespace Student.Controllers
             student.Name = tempStudent.Name;
             student.CourseId_fk = tempStudent.CourseId_fk;
             student.Id = 0;
-            StudentService service = new StudentService();
             await service.PostNewStudentAsync(student);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         public async Task<HttpResponseMessage> DeleteAsync(int id)
         {
-            StudentService Service = new StudentService();
-            await Service.DeleteAsync(id);
+            await service.DeleteAsync(id);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         public async Task<HttpResponseMessage> PutAsync(StudentPost tempStudent, int id)
         {
-            StudentService Service = new StudentService();
             StudentInfo student = new StudentInfo();
             student.Name = tempStudent.Name;
             student.CourseId_fk = tempStudent.CourseId_fk;
             student.Id = 0;
-            await Service.PutAsync(student, id);
+            await service.PutAsync(student, id);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 

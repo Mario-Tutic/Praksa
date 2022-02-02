@@ -48,6 +48,9 @@
     <Reference Include="Autofac, Version=6.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.6.3.0\lib\netstandard2.0\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=6.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.6.1.0\lib\net472\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -149,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\ContainerConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -180,7 +184,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="ContainerConfig.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -285,6 +288,10 @@
       <Project>{3a9f79b7-91c4-465b-b2c1-0da59a916725}</Project>
       <Name>Student.Service.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Student.Service\Student.Service.csproj">
+      <Project>{ca15e78d-4a32-42cf-8c5f-c5f6b1bb84be}</Project>
+      <Name>Student.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\University.Model.Common\University.Model.Common.csproj">
       <Project>{cf93b47e-f156-47a4-9413-802dcb032423}</Project>
       <Name>University.Model.Common</Name>
@@ -300,10 +307,6 @@
     <ProjectReference Include="..\University1.Common\University1.Common.csproj">
       <Project>{b0a2ce02-5ab5-4bcb-bd25-4cc7d07a7d66}</Project>
       <Name>University1.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\univesity.service\Student.Service.csproj">
-      <Project>{3cc8d5b3-786d-4348-bd78-1a7e6228a2a8}</Project>
-      <Name>Student.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

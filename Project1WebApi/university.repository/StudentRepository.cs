@@ -13,16 +13,16 @@ using University1.Common;
 
 namespace Student.Repository
 {
-    public class StudentRepository:IStudentRepository
+    public class StudentRepository : IStudentRepository
     {
-        public async Task< List<StudentInfo>> GetAllStudentsAsync(SortStudent sort, Pagging pagging, StudentFilter filter)
+        public async Task<List<StudentInfo>> GetAllStudentsAsync(SortStudent sort, Pagging pagging, StudentFilter filter)
         {
             try
             {
                 SqlConnection connection = new SqlConnection("data source=DESKTOP-KTD1H84\\SQLEXPRESS;Database=test;integrated security=SSPI");
                 connection.Open();
                 SqlCommand command = new SqlCommand(
-                "SELECT * FROM student "+ filter.Query+ " ORDER BY "+ sort.Column +" "+sort.Order+ " OFFSET "+ pagging.Offset +" ROWS FETCH NEXT "+pagging.ElementsPerPage+" ROWS ONLY", connection);
+                "SELECT * FROM student " + filter.Query + " ORDER BY " + sort.Column + " " + sort.Order + " OFFSET " + pagging.Offset + " ROWS FETCH NEXT " + pagging.ElementsPerPage + " ROWS ONLY", connection);
                 SqlDataReader reader = await command.ExecuteReaderAsync();
                 List<StudentInfo> students = new List<StudentInfo>();
                 if (reader.HasRows)
@@ -92,8 +92,8 @@ namespace Student.Repository
             {
                 SqlConnection connection = new SqlConnection("data source=DESKTOP-KTD1H84\\SQLEXPRESS;Database=test;integrated security=SSPI");
                 connection.Open();
-                SqlCommand command = new SqlCommand("UPDATE Student SET Name = '" + student.Name + "',CourseId_fk = " + student.CourseId_fk + " WHERE Id="+id+"; ", connection);
-                await command .ExecuteNonQueryAsync();
+                SqlCommand command = new SqlCommand("UPDATE Student SET Name = '" + student.Name + "',CourseId_fk = " + student.CourseId_fk + " WHERE Id=" + id + "; ", connection);
+                await command.ExecuteNonQueryAsync();
                 connection.Close();
                 return;
             }
