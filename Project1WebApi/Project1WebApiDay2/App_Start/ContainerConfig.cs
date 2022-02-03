@@ -16,20 +16,26 @@ namespace Project1WebApiDay2
 {
     public static class ContainerConfig
     {
-        public static IContainer Configure()
+        public static IContainer Container;
+
+        public static void Initialize(HttpConfiguration config)
         {
-            var builder = new ContainerBuilder();
-
-            builder.RegisterType<StudentService>().As<IStudentService>();
-            builder.RegisterType<CourseService>().As<ICourseService>();
-            builder.RegisterType<StudentRepository>().As<IStudentRepository>();
-            builder.RegisterType<CourseRepository>().As<ICourseRepository>();
-
-
-            return builder.Build();
+            Initialize(config, RegisterServices(new ContainerBuilder()));
         }
 
 
-
+        public static void Initialize(HttpConfiguration config, IContainer container)
+        {
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+        }
+        private static IContainer RegisterServices(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new ServiceDIModule());
+            builder.RegisterModule(new RepositoryDIModule());
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            //builder.RegisterAssemblyModules(Assembly.GetExecutingAssembly());
+            Container = builder.Build();
+            return Container;
+        }
     }
 }
